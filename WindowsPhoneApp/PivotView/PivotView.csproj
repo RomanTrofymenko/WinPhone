@@ -128,6 +128,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FeedViewModel.cs" />
     <Compile Include="ViewModels\MockFeedVm.cs" />
+    <Compile Include="ViewModels\MockProfileVm.cs" />
     <Compile Include="ViewModels\PivotPageViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
   </ItemGroup>

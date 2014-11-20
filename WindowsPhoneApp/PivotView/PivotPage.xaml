@@ -20,7 +20,8 @@
         </TransitionCollection>
     </Page.Transitions>
     <Page.Resources>
-        <viewModels:MockFeedVm x:Key="MockVm"/>
+        <viewModels:MockFeedVm x:Key="MockFeedVm"/>
+        <viewModels:MockProfileVm x:Key="MockProfileVm"/>
     </Page.Resources>
     <Grid>
         <Pivot x:Uid="Pivot" Title="INSTAGRAM CLIENT" x:Name="pivot" CommonNavigationTransitionInfo.IsStaggerElement="True" Grid.Row="2">
@@ -30,47 +31,48 @@
                 Margin="19,14.5,0,0"
                 Header="feed"
                 DataContext="{Binding FeedViewModel}"
-                d:DataContext="{Binding Source={StaticResource MockVm}}"
+                d:DataContext="{Binding Source={StaticResource MockFeedVm}}"
                 CommonNavigationTransitionInfo.IsStaggerElement="True"
                 HorizontalAlignment="Center">
                 <!--Double line list with text wrapping-->
-                <StackPanel>
-                    <ListView 
+                <!--<StackPanel>-->
+                <ListView 
                     ItemsSource="{Binding Posts}"
                     IsItemClickEnabled="True"
                     ItemClick="ItemView_ItemClick"
                     ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="10,10,10,0">
-                                    <Image Source="{Binding Images.StandRes.Url}" />
-                                    <Grid Margin="0,-50,0,0" Background="#7F808080" >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Margin="10,5,0,5">
-                                            <Ellipse Width="40" Height="40">
-                                                <Ellipse.Fill>
-                                                    <ImageBrush ImageSource="{Binding User.ProfilePicture}"/>
-                                                </Ellipse.Fill>
-                                            </Ellipse>
-                                            <TextBlock Text="{Binding User.UserName}" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                                        </StackPanel>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" UseLayoutRounding="False" >
-                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="💬" Margin="0,0,2,0"/>
-                                            <TextBlock Text="{Binding Comments.Count}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="10,10,10,0">
+                                <Image Source="{Binding Images.StandRes.Url}" />
+                                <Grid Margin="0,-50,0,0" Background="#7F808080" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="0" Margin="10,5,0,5">
+                                        <Ellipse Width="40" Height="40">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding User.ProfilePicture}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <TextBlock Text="{Binding User.UserName}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" UseLayoutRounding="False" >
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Text="💬" Margin="0,0,2,0"/>
+                                        <TextBlock Text="{Binding Comments.Count}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,20,0" />
 
-                                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{Binding Path=UserHasLiked, Converter={StaticResource RedHeartConverter}}" FontSize="18" Text="♥"/>
-                                            <TextBlock Text="{Binding Likes.Count}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" />
-                                        </StackPanel>
-                                    </Grid>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <Button HorizontalAlignment="Center" Command="{Binding GetMorePostsCommand}" Content="Load More"/>
-                </StackPanel>
+                                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{Binding Path=UserHasLiked, Converter={StaticResource RedHeartConverter}}" FontSize="18" Text="♥"/>
+                                        <TextBlock Text="{Binding Likes.Count}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <Button HorizontalAlignment="Center" Command="{Binding GetMorePostsCommand}" Content="Load More"/>
+                    </ListView.Footer>
+                </ListView>
             </PivotItem>
 
             <!--Pivot item two-->
@@ -79,10 +81,31 @@
                 Margin="19,14.5,0,0"
                 Header="profile"
                 DataContext="{Binding ProfileViewModel}"
+                d:DataContext="{StaticResource MockProfileVm}"
                 HorizontalAlignment="Center">
                 <!--Double line list no text wrapping-->
-                <StackPanel>
-                    
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Width="150" Height="150">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding User.ProfilePicture}"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding User.FullName}" FontSize="24" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding User.Bio}" TextWrapping="WrapWholeWords" TextTrimming="Clip" MaxWidth="200"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListView ItemsSource="{Binding Posts}"
+                              IsItemClickEnabled="True"
+                              ItemClick="ItemView_ItemClick"
+                              ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Images.Thumbnail.Url}" Width="60" Height="60"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
             </PivotItem>
         </Pivot>
