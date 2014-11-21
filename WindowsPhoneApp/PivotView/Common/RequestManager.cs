@@ -51,13 +51,16 @@ namespace PivotView.Common
             return feed;
         }
 
+        public static async Task<FeedResponse> GetUserMedia(string userId = null)
+        {
+            return await GetFeed(String.Format("{0}users/{1}/media/recent?access_token={2}", _apiBase, String.IsNullOrEmpty(userId) ? "self" : userId, _token));
+        }
+
         public static async Task<ProfileResponse> GetUserProfile(string userId = null)
         {
             ProfileResponse profile = null;
 
-            var user = String.IsNullOrEmpty(userId) ? "self" : userId;
-
-            var requestUrl = String.Format("{2}users/{0}?access_token={1}", user, _token, _apiBase);
+            var requestUrl = String.Format("{0}users/{1}?access_token={2}",_apiBase, String.IsNullOrEmpty(userId) ? "self" : userId, _token);
             var req = WebRequest.Create(requestUrl);
             using (var response = await req.GetResponseAsync())
             {

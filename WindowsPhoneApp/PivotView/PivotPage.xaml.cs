@@ -56,9 +56,9 @@ namespace PivotView
         /// session. The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            
             var feed = await RequestManager.GetFeed();
             this._defaultViewModel.FeedViewModel = new FeedViewModel(feed);
+            this._defaultViewModel.ProfileViewModel = new ProfileViewModel(await RequestManager.GetUserProfile(), await RequestManager.GetUserMedia());
         }
 
         /// <summary>
@@ -85,14 +85,6 @@ namespace PivotView
             {
                 throw new Exception(this._resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
-        }
-
-        /// <summary>
-        /// Loads the content for the second pivot item when it is scrolled into view.
-        /// </summary>
-        private async void SecondPivot_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         #region NavigationHelper registration

@@ -136,10 +136,10 @@
     <value>INSTAGRAM CLIENT</value>
   </data>
   <data name="PivotItem1.Header" xml:space="preserve">
-    <value>first</value>
+    <value>feed</value>
   </data>
   <data name="PivotItem2.Header" xml:space="preserve">
-    <value>second</value>
+    <value>profile</value>
   </data>
   <data name="SecondaryButton1.Label" xml:space="preserve">
     <value>secondary command 1</value>

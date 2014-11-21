@@ -84,29 +84,34 @@
                 d:DataContext="{StaticResource MockProfileVm}"
                 HorizontalAlignment="Center">
                 <!--Double line list no text wrapping-->
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="150" Height="150">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding User.ProfilePicture}"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                            <TextBlock Text="{Binding User.FullName}" FontSize="24" VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding User.Bio}" TextWrapping="WrapWholeWords" TextTrimming="Clip" MaxWidth="200"/>
-                        </StackPanel>
-                    </StackPanel>
-                    <ListView ItemsSource="{Binding Posts}"
+                <Grid>
+                    <GridView ItemsSource="{Binding Posts}"
                               IsItemClickEnabled="True"
                               ItemClick="ItemView_ItemClick"
                               ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <ListView.ItemTemplate>
+                        <GridView.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Ellipse Width="150" Height="150">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding User.ProfilePicture}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding User.FullName}" FontSize="24" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding User.Bio}" TextWrapping="WrapWholeWords" TextTrimming="Clip" MaxWidth="200"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </GridView.Header>
+                        <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Images.Thumbnail.Url}" Width="60" Height="60"/>
+                                <Image Source="{Binding Images.Thumbnail.Url}" Width="60" Height="60" Margin="5" />
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
+                        </GridView.ItemTemplate>
+                        <GridView.Footer>
+                            <Button HorizontalAlignment="Center" Command="{Binding GetMorePostsCommand}" Content="Load More"/>
+                        </GridView.Footer>
+                    </GridView>
+                </Grid>
             </PivotItem>
         </Pivot>
     </Grid>

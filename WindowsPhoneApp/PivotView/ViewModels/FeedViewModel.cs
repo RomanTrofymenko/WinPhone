@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PivotView.Common;
 using PivotView.DataModel.InstagramModel;
@@ -12,9 +13,12 @@ namespace PivotView.ViewModels
         {
             _nextPostsUrl = feed.Pagination.NextUrl;
             Posts = new ObservableCollection<Post>(feed.Data);
-            GetMorePostsCommand = new RelayCommand(GetMorePosts);
+            GetMorePostsCommand = new RelayCommand(GetMorePosts, CanGetMorePosts);
         }
-
+        private bool CanGetMorePosts()
+        {
+            return !String.IsNullOrEmpty(_nextPostsUrl);
+        }
         private async void GetMorePosts()
         {
             var newPosts = await RequestManager.GetFeed(_nextPostsUrl);

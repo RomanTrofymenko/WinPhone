@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PivotView.DataModel.InstagramModel;
@@ -31,21 +32,23 @@ namespace PivotView.ViewModels
                 User = _user,
                 Images = new Images
                 {
-                    LowRes =
+
+                    LowRes = new Image
                     {
+                        
                         Height = 306,
                         Width = 306,
                         Url =
                             "http://scontent-a.cdninstagram.com/hphotos-xpa1/t51.2885-15/10727804_745639228840605_1941302651_a.jpg"
                     },
-                    StandRes =
+                    StandRes = new Image
                     {
                         Height = 640,
                         Width = 640,
                         Url =
                             "http://scontent-a.cdninstagram.com/hphotos-xpa1/t51.2885-15/10727804_745639228840605_1941302651_n.jpg"
                     },
-                    Thumbnail =
+                    Thumbnail = new Image
                     {
                         Height = 150,
                         Width = 150,
@@ -63,7 +66,7 @@ namespace PivotView.ViewModels
         {
             return _posts ??
                    (_posts =
-                       new ObservableCollection<Post>(new Post[]
+                       new ObservableCollection<Post>(new List<Post>
                        {
                            GetPost(), GetPost(), GetPost(), GetPost(), GetPost(), GetPost(), GetPost(), GetPost(), GetPost()
                        }));
