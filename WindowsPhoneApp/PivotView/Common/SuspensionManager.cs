@@ -24,7 +24,7 @@ namespace PivotView.Common
     {
         private static Dictionary<string, object> _sessionState = new Dictionary<string, object>();
         private static List<Type> _knownTypes = new List<Type>();
-        private const string sessionStateFilename = "_sessionState.xml";
+        private const string _sessionStateFilename = "_sessionState.xml";
 
         /// <summary>
         /// Provides access to global session state for the current session.  This state is
@@ -76,7 +76,7 @@ namespace PivotView.Common
                 serializer.WriteObject(sessionData, _sessionState);
 
                 // Get an output stream for the SessionState file and write the state asynchronously
-                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(sessionStateFilename, CreationCollisionOption.ReplaceExisting);
+                StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(_sessionStateFilename, CreationCollisionOption.ReplaceExisting);
                 using (Stream fileStream = await file.OpenStreamForWriteAsync())
                 {
                     sessionData.Seek(0, SeekOrigin.Begin);
@@ -107,7 +107,7 @@ namespace PivotView.Common
             try
             {
                 // Get the input stream for the SessionState file
-                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(sessionStateFilename);
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(_sessionStateFilename);
                 using (IInputStream inStream = await file.OpenSequentialReadAsync())
                 {
                     // Deserialize the Session State
