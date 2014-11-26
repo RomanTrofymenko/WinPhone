@@ -1,27 +1,35 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Net;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.Networking.BackgroundTransfer;
 using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.UI.Notifications;
-using Windows.UI.Xaml;
-using PivotView.Common;
-using PivotView.DataModel.InstagramModel;
+using InstagramClient.Model;
 
-namespace PivotView.Background
+namespace InstagramClient.BackgroundTask
 {
     public sealed class TileUpdateTask : IBackgroundTask
     {
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
+            if (!RequestManager.TryGetToken())
+                return;
+
             var deferral = taskInstance.GetDeferral();
 
             var feed = await RequestManager.GetFeed();
 
             UpdateTile(feed);
+
+            var xmlContent = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
+            xmlContent.GetElementsByTagName(_textElementName)[0].InnerText = "Hello from Instagram Client!";
+            var toastNode = xmlContent.GetElementsByTagName("toast")[0];
+            ((XmlElement)toastNode).SetAttribute("launch", "{\"type\":\"toast\",\"postId\":\"1\",\"param2\":\"2\"}");
+            var notification = new ToastNotification(xmlContent);
+            var toastManager = ToastNotificationManager.CreateToastNotifier();
+            toastManager.Show(notification);
             
             deferral.Complete();
         }
@@ -31,22 +39,16 @@ namespace PivotView.Background
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.EnableNotificationQueue(true);
             updater.Clear();
-
+            
             // Keep track of the number feed items that get tile notifications. 
             int itemCount = 0;
 
             // Create a tile notification for each feed item.
-            foreach (var item in feed.Data.Take(5))
+            foreach (var item in feed.Data)
             {
-                var file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(String.Format("temp{0}.jpg", itemCount));
-                
-                
-                var download = new BackgroundDownloader().CreateDownload(new Uri(item.Images.StandRes.Url), file);
-                await download.StartAsync();
-
                 var tileXml = TileUpdateManager.GetTemplateContent(TileTemplateType.TileWide310x150ImageAndText02);
 
-                tileXml.GetElementsByTagName(_imageElementName)[0].Attributes.GetNamedItem("src").InnerText = file.Name;
+                tileXml.GetElementsByTagName(_imageElementName)[0].Attributes.GetNamedItem("src").InnerText = item.Images.LowRes.Url;
                 tileXml.GetElementsByTagName(_textElementName)[0].InnerText = item.User.FullName;
                 tileXml.GetElementsByTagName(_textElementName)[1].InnerText = item.Caption.Text ?? String.Empty;
 

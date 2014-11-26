@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PivotView", "PivotView\PivotView.csproj", "{0E603EA0-182E-4C40-A313-4812FB0FEF5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramClient", "PivotView\InstagramClient.csproj", "{0E603EA0-182E-4C40-A313-4812FB0FEF5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramClient.Model", "InstagramClient.Model\InstagramClient.Model.csproj", "{48770778-704F-41FA-9326-A86ECE457CC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstagramClient.BackgroundTask", "InstagramClient.BackgroundTask\InstagramClient.BackgroundTask.csproj", "{5F6DC713-3F6A-4BE5-80F4-48F33245D298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,22 @@ Global
 		{0E603EA0-182E-4C40-A313-4812FB0FEF5B}.Release|x86.ActiveCfg = Release|x86
 		{0E603EA0-182E-4C40-A313-4812FB0FEF5B}.Release|x86.Build.0 = Release|x86
 		{0E603EA0-182E-4C40-A313-4812FB0FEF5B}.Release|x86.Deploy.0 = Release|x86
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Release|ARM.ActiveCfg = Release|Any CPU
+		{48770778-704F-41FA-9326-A86ECE457CC7}.Release|x86.ActiveCfg = Release|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5F6DC713-3F6A-4BE5-80F4-48F33245D298}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
-namespace PivotView.DataModel.InstagramModel
+namespace InstagramClient.Model
 {
     [DataContract]
-    class ProfileResponse
+    public class ProfileResponse
     {
         [DataMember(Name = "data")]
         public User Data { get; set; }

@@ -1,6 +1,6 @@
 using System.Runtime.Serialization;
 
-namespace PivotView.DataModel.InstagramModel
+namespace InstagramClient.Model
 {
     [DataContract]
     public class UserInPhoto

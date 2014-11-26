@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using InstagramClient.Common;
+using InstagramClient.Model;
 using PivotView.Common;
-using PivotView.DataModel.InstagramModel;
 
-namespace PivotView.ViewModels
+namespace InstagramClient.ViewModels
 {
     public class ProfileViewModel
     {

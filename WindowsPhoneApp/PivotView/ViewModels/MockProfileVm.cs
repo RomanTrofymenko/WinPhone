@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using PivotView.DataModel.InstagramModel;
+using InstagramClient.Model;
 
-namespace PivotView.ViewModels
+namespace InstagramClient.ViewModels
 {
     public class MockProfileVm
     {

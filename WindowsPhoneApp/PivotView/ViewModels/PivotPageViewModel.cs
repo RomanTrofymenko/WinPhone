@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace PivotView.ViewModels
+namespace InstagramClient.ViewModels
 {
     public class PivotPageViewModel : INotifyPropertyChanged
     {

@@ -1,4 +1,9 @@
-﻿using PivotView.Common;
+﻿using Windows.ApplicationModel.Background;
+using InstagramClient;
+using InstagramClient.Common;
+using InstagramClient.Model;
+using InstagramClient.ViewModels;
+using PivotView.Common;
 using System;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -6,7 +11,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
-using PivotView.ViewModels;
 
 namespace PivotView
 {
@@ -104,8 +108,33 @@ namespace PivotView
         /// handlers that cannot cancel the navigation request.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.RegisterBackgroundTask();
             this._navigationHelper.OnNavigatedTo(e);
         }
+
+        private async void RegisterBackgroundTask()
+        {
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity ||
+                backgroundAccessStatus == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = taskName;
+                taskBuilder.TaskEntryPoint = taskEntryPoint;
+                taskBuilder.SetTrigger(new TimeTrigger(15, false));
+                var registration = taskBuilder.Register();
+            }
+        }
+        private const string taskName = "TileUpdateTask";
+        private const string taskEntryPoint = "InstagramClient.BackgroundTask.TileUpdateTask";
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

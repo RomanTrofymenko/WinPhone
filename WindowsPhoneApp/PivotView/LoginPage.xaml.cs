@@ -1,26 +1,16 @@
-﻿using Windows.ApplicationModel.Activation;
+﻿using System;
+using Windows.ApplicationModel.Activation;
 using Windows.Security.Authentication.Web;
-using PivotView.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using InstagramClient.Common;
+using PivotView;
+using PivotView.Common;
 
 // The Basic Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace PivotView
+namespace InstagramClient
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -114,14 +104,19 @@ namespace PivotView
         {
             if (args.WebAuthenticationResult.ResponseStatus == WebAuthenticationStatus.Success)
             {
-                RequestManager.EndAuthenticate(args.WebAuthenticationResult);
+                AuthenticationHelper.EndAuthenticate(args.WebAuthenticationResult);
                 Frame.Navigate(typeof(PivotPage));
             }
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            RequestManager.BeginAuthenticate();
+            if(!AuthenticationHelper.IsAuthenticated())
+                AuthenticationHelper.BeginAuthenticate();
+            else
+            {
+                Frame.Navigate(typeof (PivotPage));
+            }
         }
     }
 }

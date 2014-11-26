@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using PivotView.DataModel.InstagramModel;
+using InstagramClient.Model;
 
-namespace PivotView.ViewModels
+namespace InstagramClient.ViewModels
 {
     public class MockFeedVm
     {
@@ -23,7 +20,7 @@ namespace PivotView.ViewModels
             }
         }
 
-        public ICommand GetMorePostsCommand { get; set; } 
+        public ICommand GetMorePostsCommand { get; set; }
 
         private Post GetPost1()
         {
@@ -40,7 +37,7 @@ namespace PivotView.ViewModels
 
                 Caption = new Comment()
                 {
-                    CreatedTime = Constants.GetDateTimeFromSeconds("1416216734"),
+                    CreatedTime = new DateTime(2014, 11, 20),
                     From = new User()
                     {
                         FullName = "Dmitry Shapar",
@@ -59,7 +56,7 @@ namespace PivotView.ViewModels
                     {
                         new Comment
                         {
-                            CreatedTime = Constants.GetDateTimeFromSeconds("1416216734"),
+                            CreatedTime = new DateTime(2014, 11, 20),
                             From = new User()
                             {
                                 FullName = "Dmitry Shapar",
@@ -141,7 +138,7 @@ namespace PivotView.ViewModels
 
                 Caption = new Comment()
                 {
-                    CreatedTime = Constants.GetDateTimeFromSeconds("1416216734"),
+                    CreatedTime = new DateTime(2014, 11, 20),
                     From = new User()
                     {
                         FullName = "Dmitry Shapar",
@@ -160,7 +157,7 @@ namespace PivotView.ViewModels
                     {
                         new Comment
                         {
-                            CreatedTime = Constants.GetDateTimeFromSeconds("1416216734"),
+                            CreatedTime = new DateTime(2014, 11, 20),
                             From = new User()
                             {
                                 FullName = "Dmitry Shapar",

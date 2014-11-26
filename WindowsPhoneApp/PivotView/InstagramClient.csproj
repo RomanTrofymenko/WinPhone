@@ -7,8 +7,8 @@
     <ProjectGuid>{0E603EA0-182E-4C40-A313-4812FB0FEF5B}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PivotView</RootNamespace>
-    <AssemblyName>PivotView</AssemblyName>
+    <RootNamespace>InstagramClient</RootNamespace>
+    <AssemblyName>InstagramClient</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -97,8 +97,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Common\RequestManager.cs" />
-    <Compile Include="DataModel\InstagramModel\ProfileResponse.cs" />
     <Compile Include="ForegroundColorConverter.cs" />
     <Compile Include="LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -108,17 +106,6 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="DataModel\InstagramModel\Constants.cs" />
-    <Compile Include="DataModel\InstagramModel\Comment.cs" />
-    <Compile Include="DataModel\InstagramModel\FeedResponse.cs" />
-    <Compile Include="DataModel\InstagramModel\Image.cs" />
-    <Compile Include="DataModel\InstagramModel\Images.cs" />
-    <Compile Include="DataModel\InstagramModel\Location.cs" />
-    <Compile Include="DataModel\InstagramModel\Position.cs" />
-    <Compile Include="DataModel\InstagramModel\Post.cs" />
-    <Compile Include="DataModel\InstagramModel\PostSet.cs" />
-    <Compile Include="DataModel\InstagramModel\User.cs" />
-    <Compile Include="DataModel\InstagramModel\UserInPhoto.cs" />
     <Compile Include="ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +113,9 @@
       <DependentUpon>PivotPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AuthenticationHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ViewModels\FeedViewModel.cs" />
     <Compile Include="ViewModels\MockFeedVm.cs" />
     <Compile Include="ViewModels\MockProfileVm.cs" />
@@ -138,6 +128,8 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BadgeLogo.scale-100.png" />
+    <Content Include="Assets\BadgeLogo.scale-240.png" />
     <Content Include="Assets\instagram-512.png" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
@@ -158,6 +150,17 @@
       <SubType>Designer</SubType>
     </PRIResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InstagramClient.BackgroundTask\InstagramClient.BackgroundTask.csproj">
+      <Project>{5f6dc713-3f6a-4be5-80f4-48f33245d298}</Project>
+      <Name>InstagramClient.BackgroundTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InstagramClient.Model\InstagramClient.Model.csproj">
+      <Project>{48770778-704f-41fa-9326-a86ece457cc7}</Project>
+      <Name>InstagramClient.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

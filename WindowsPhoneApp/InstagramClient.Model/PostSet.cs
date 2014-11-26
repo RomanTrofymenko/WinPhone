@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace PivotView.DataModel.InstagramModel
+namespace InstagramClient.Model
 {
     [DataContract]
     public class PostSet<T>

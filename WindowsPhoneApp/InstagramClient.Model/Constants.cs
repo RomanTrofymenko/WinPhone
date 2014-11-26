@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PivotView.DataModel.InstagramModel
+namespace InstagramClient.Model
 {
     internal static class Constants
     {

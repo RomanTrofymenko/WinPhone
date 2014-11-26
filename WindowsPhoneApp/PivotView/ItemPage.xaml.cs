@@ -1,4 +1,5 @@
-﻿using PivotView.Common;
+﻿using InstagramClient.Common;
+using PivotView.Common;
 using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
