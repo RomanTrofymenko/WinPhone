@@ -21,7 +21,7 @@ namespace InstagramClient.Model
         private string CreatedTimeJson
         {
             get { return this.CreatedTime.Ticks.ToString(); }
-            set { this.CreatedTime = Constants.GetDateTimeFromSeconds(value); }
+            set { this.CreatedTime = TimeConverter.GetDateTimeFromSeconds(value); }
         }
 
         [DataMember(Name = "filter")]

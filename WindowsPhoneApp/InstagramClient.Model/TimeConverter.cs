@@ -2,7 +2,7 @@
 
 namespace InstagramClient.Model
 {
-    internal static class Constants
+    internal static class TimeConverter
     {
         public static DateTime GetDateTimeFromSeconds(string seconds)
         {
