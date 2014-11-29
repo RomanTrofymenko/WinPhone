@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comment.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="TimeConverter.cs" />
     <Compile Include="FeedResponse.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Images.cs" />
