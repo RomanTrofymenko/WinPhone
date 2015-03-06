@@ -18,11 +18,14 @@ namespace InstagramClient.BackgroundTask
                 return;
 
             var deferral = taskInstance.GetDeferral();
+            try
+            {
+                var feed = await RequestManager.GetFeed();
 
-            var feed = await RequestManager.GetFeed();
-
-            UpdateTile(feed);
-
+                UpdateTile(feed);
+            }
+            catch (Exception)
+            { }
             var xmlContent = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
             xmlContent.GetElementsByTagName(_textElementName)[0].InnerText = "Hello from Instagram Client!";
             var toastNode = xmlContent.GetElementsByTagName("toast")[0];
@@ -30,7 +33,7 @@ namespace InstagramClient.BackgroundTask
             var notification = new ToastNotification(xmlContent);
             var toastManager = ToastNotificationManager.CreateToastNotifier();
             toastManager.Show(notification);
-            
+
             deferral.Complete();
         }
 
@@ -39,7 +42,7 @@ namespace InstagramClient.BackgroundTask
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.EnableNotificationQueue(true);
             updater.Clear();
-            
+
             // Keep track of the number feed items that get tile notifications. 
             int itemCount = 0;
 
