@@ -2,11 +2,14 @@
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using InstagramClient.Common;
+using InstagramClient.Model;
+using PivotView;
 using PivotView.Common;
 
 // The Pivot Application template is documented at http://go.microsoft.com/fwlink/?LinkID=391641
@@ -96,9 +99,16 @@ namespace InstagramClient
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter.
-                if (!rootFrame.Navigate(typeof(LoginPage), e.Arguments))
+                ApplicationData.Current.LocalSettings.Values["token"] = "1415662153.f6ecbb4.dedb6f9f24be4ed7b1dc888a61948fec";
+                if (!RequestManager.TryGetToken())
                 {
-                    throw new Exception("Failed to create initial page");
+                    rootFrame.Navigate(typeof (LoginPage), e.Arguments);
+                }
+                else
+                {
+                    var args = e.Arguments;
+                    rootFrame.Navigate(typeof (PivotPage), e.Arguments);
+
                 }
             }
 

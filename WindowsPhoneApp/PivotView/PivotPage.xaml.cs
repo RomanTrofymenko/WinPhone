@@ -60,9 +60,14 @@ namespace PivotView
         /// session. The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            var feed = await RequestManager.GetFeed();
-            this._defaultViewModel.FeedViewModel = new FeedViewModel(feed);
-            this._defaultViewModel.ProfileViewModel = new ProfileViewModel(await RequestManager.GetUserProfile(), await RequestManager.GetUserMedia());
+            try
+            {
+                this._defaultViewModel.FeedViewModel = new FeedViewModel(await RequestManager.GetFeed());
+                this._defaultViewModel.ProfileViewModel = new ProfileViewModel(await RequestManager.GetUserProfile(),
+                    await RequestManager.GetUserMedia());
+            }
+            catch(Exception)
+            { }
         }
 
         /// <summary>
